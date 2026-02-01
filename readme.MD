@@ -47,8 +47,10 @@ Run locally in your browser:
 git clone https://github.com/Subhas6033/PANDU.git
 cd PANDU
 open index.html
+---
 
 ## 📜 License
 
 This project is licensed under the **MIT License**.  
 See the `LICENSE` file for details.
+
