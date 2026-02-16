@@ -34,7 +34,7 @@ Built with pure web technologies for smooth and responsive performance.
 ## 🧠 Technologies Used
 
 - **HTML5** — Structure  
-- **CSS3** — Styling  
+- **TailwindCSS** — Utility-first CSS framework  
 - **JavaScript** — Voice recognition & logic  
 
 ---
