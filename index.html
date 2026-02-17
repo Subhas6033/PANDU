@@ -1,104 +1,18 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/src/assets/Robot.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Subhas">
-    <meta name="description"
-        content="PANDU is your personal assistant like JARVIS. PANDU can do various kind of work. Though more features are coming up, PANDU's present features are he can open Youtube,facebook,Google,Instagram etc. He can search for song in Youtube, also can search anything in Google.But there is  a boundary of use PANDU. Among all of the boundary the major boundary is many of times it can't run in Google Chrome because of it's some security protection, to run this you have to download Microsoft Edge">
-    <meta name="keywords" content="HTML<CSS<JS">
+    <meta name="description" content="PANDU is your personal assistant like JARVIS. PANDU can do various kind of work.">
+    <meta name="keywords" content="HTML,CSS,JS,React">
     <meta name="robots" content="index, follow">
     <title>P A N D U the AI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        serif: ['"Times New Roman"', 'Times', 'serif'],
-                    },
-                    screens: {
-                        'max-lg': { 'max': '1500px' },
-                        'max-md': { 'max': '768px' },
-                    },
-                },
-            },
-        }
-    </script>
-    <link rel="icon" href="./Robot.jpg">
-</head>
-
-<body class="min-h-screen bg-black flex flex-col items-center justify-center font-sans p-5 overflow-x-hidden">
-    <h1
-        class="mx-2 my-1 font-serif text-white text-5xl max-lg:text-[2rem] max-md:text-2xl text-center underline decoration-blue-500 decoration-2 underline-offset-4">
-        Hii !I am Pandu! How can i help you?
-    </h1>
-
-    <div class="wavy-animation">
-        <img src="./Mic.jpg" alt="mic image"
-            class="max-h-[350px] max-w-[350px] max-lg:max-h-[250px] max-lg:max-w-[250px] max-md:max-h-[200px] max-md:max-w-[200px] object-cover aspect-square h-auto rounded-full hover:mt-5 hover:scale-110 hover:border-[20px] hover:border-white transition-all duration-500">
-    </div>
-
-    <!-- Button -->
-    <div class="p-5 max-md:p-2 gap-5 max-md:gap-2 flex justify-center items-center flex-wrap">
-        <button id="vr-start"
-            class="mt-5 px-5 py-2.5 text-base cursor-pointer bg-[#3498db] text-white border-none rounded-md transition-colors duration-300 hover:bg-[#2980b9]">
-            Start Voice Record
-        </button>
-        <button
-            class="mt-5 px-5 py-2.5 text-base cursor-pointer bg-[#3498db] text-white border-none rounded-md transition-colors duration-300 hover:bg-[#2980b9]">
-            <a href="#user-guide"
-                class="no-underline text-white text-[1.4rem] max-md:text-[1.2rem] px-5 py-2">User-Guide</a>
-        </button>
-    </div>
-
-    <div class="text-white leading-[30px] max-lg:text-base max-md:text-[0.8rem] max-md:mx-1" id="user-guide">
-        <p>
-        <ul>
-            <p class="text-3xl text-center">Commands you should follow to use this features :</p> <br>
-            <li>Use only English language.</li>
-            <li>Don't use bad word otherwise it won't work fine.</li>
-            <li>Most probably it can't run on Google chrome, so download Microsoft Edge to use it.</li>
-            <li>To find and play a song, just say: "Play the (Your desired song name) song".</li>
-            <li>List of the work which PANDU can do :
-            <li>He can open the app given below by your command,command is : ("Open (your desired app name) ") .
-            </li>
-            <ol class="flex gap-6 mx-0.5 my-1 max-md:grid" style="list-style-type: lower-roman;">
-                <li>Facebook,</li>
-                <li>Youtube,</li>
-                <li>Whatsapp,</li>
-                <li>Instagram,</li>
-                <li>Telegram,</li>
-                <li>Github,</li>
-                <li>Linkedin,</li>
-                <li>ChatGpt,</li>
-                <li>Gmail,</li>
-                <li>Twitter or X</li>
-            </ol>
-            <li>He can search anything in Google.</li>
-            <li>To search anything in Google just say : search for "Your desired search".Example : to search the
-                weather, say :
-                "search for today's weather".</li>
-            <li class="list-[square] text-3xl text-[bisque] mx-2.5 my-2.5">Hope you enjoy it...
-                More features are on the way, stay tuned with <b><em>me</em></b>...</li>
-            </li>
-        </ul>
-        </p>
-    </div>
-
-    <footer
-        class="mt-5 w-full h-[100px] rounded-lg leading-[100px] bg-[#0098fea9] text-white flex flex-col items-center justify-center">
-        <p class="max-h-[100px] max-w-full text-center text-[#060000] text-xl max-md:text-base">&copy; copyright 2024
-            all rights reserved. Developed and created by <a href="https://www.linkedin.com/in/subhas-mondal-bubai6033/"
-                target="_blank"
-                class="no-underline text-white text-[1.4rem] max-md:text-[1.2rem]"><b><i>&ltSubhas/&gt</i></b></a>
-        </p>
-    </footer>
-
-    <!-- Script -->
-    <script src="./script.js"></script>
+  </head>
+  <body class="bg-black text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
     <noscript>You Need JavaScript for this site</noscript>
-</body>
-
+  </body>
 </html>

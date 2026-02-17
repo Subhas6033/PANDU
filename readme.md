@@ -1,59 +1,38 @@
-# 🚀 PANDU — Your Voice-Powered AI Assistant
+# PANDU - React Migration
 
-**PANDU** is a lightweight, web-based voice assistant that understands spoken commands and performs actions like web search, media playback, and opening popular apps — all using natural voice interaction.
+This project is a React migration of the PANDU voice assistant using Vite 4 and Tailwind CSS.
 
-🔗 **Live Demo:** https://pandutheai.netlify.app/
+## 🚀 Getting Started
 
----
+Since this project was generated manually (due to environment restrictions), you must install the dependencies before running it.
 
-## ✨ Features
+### Prerequisites
+- Node.js (v16+)
+- npm (v7+)
 
-🎤 **Voice Command Control**  
-Use natural speech to control the assistant hands-free.
+### Installation
 
-📱 **App & Website Shortcuts**  
-Open YouTube, Google, GitHub, Instagram, Facebook, Twitter, and more using voice commands.
+1. Open your terminal in this directory:
+   ```bash
+   cd pandu-react
+   ```
 
-🔍 **Web Search & Media Playback**  
-Search the web or play songs and videos instantly with voice input.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-⚡ **Fast & Lightweight**  
-Built with pure web technologies for smooth and responsive performance.
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
----
+## 🛠 Tech Stack
+- React 18
+- Vite 4
+- Tailwind CSS 3
+- Web Speech API (SpeechRecognition & SpeechSynthesis)
 
-## 💡 How It Works
-
-1. The user speaks a command into the microphone.
-2. The browser converts speech into text.
-3. PANDU analyzes the command.
-4. The requested action is executed instantly.
-
----
-
-## 🧠 Technologies Used
-
-- **HTML5** — Structure  
-- **TailwindCSS** — Utility-first CSS framework  
-- **JavaScript** — Voice recognition & logic  
-
----
-
-## 🧑‍💻 Getting Started
-
-Run locally in your browser:
-
-```bash
-git clone https://github.com/Subhas6033/PANDU.git
-cd PANDU
-open index.html
-```
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License**.  
-See the `LICENSE` file for details.
-
-
+## ⚠️ Known Issues
+- Voice recognition may only work in Chromium-based browsers (Chrome, Edge).
+- Ensure your microphone permissions are granted.

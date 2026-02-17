@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .clip-circle {
+    clip-path: circle(50% at 50% 50%);
+  }
+}
+
+body {
+  background: radial-gradient(circle at center, #1e1e2f 0%, #0f0f13 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Keyframes for simple rotation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating-gradient-ring {
+  position: absolute;
+  top: -15px;
+  /* Adjust thickness/offset */
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  border-radius: 50%;
+
+  /* Conic gradient for the ring color */
+  background: conic-gradient(from 0deg,
+      #00ffff,
+      /* Cyan start */
+      #0099ff,
+      /* Blue mid */
+      transparent 60%,
+      /* Fade out */
+      transparent 98%,
+      #00ffff
+      /* Loop back seamlessly */
+    );
+
+  /* Rotate the entire ring */
+  animation: spin 3s linear infinite;
+
+  /* Mask the center to create a ring shape */
+  -webkit-mask: radial-gradient(transparent 66%, black 67%);
+  mask: radial-gradient(transparent 66%, black 67%);
+
+  z-index: 0;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  /* Glow */
+}
+
+/* Alternate Glow Method */
+.glow-ring-border {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #00d2ff, #2a5298, transparent, transparent, #00d2ff);
+  /* High contrast ring */
+  animation: spin 4s linear infinite;
+
+  /* Create the hole in the middle */
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #fff calc(100% - 6px));
+  /* 6px thick border */
+  mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #fff calc(100% - 6px));
+
+  z-index: 0;
+  filter: drop-shadow(0 0 10px #00d2ff);
+}
