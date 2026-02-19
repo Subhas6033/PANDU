@@ -10,7 +10,7 @@ export default function Microphone({ isListening }) {
                 <div className="glow-ring-border w-full h-full absolute inset-0 rounded-full"></div>
 
                 {/* The Static Image */}
-                <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-4 border-[#1e1e2f] shadow-2xl">
+                <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-4 border-gray-200 dark:border-[#1e1e2f] shadow-2xl">
                     <img
                         src={micImg}
                         alt="Microphone"

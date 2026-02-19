@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="w-full py-6 bg-[#6c5ce7] text-center text-white text-lg rounded-t-lg md:rounded-lg shadow-inner">
+        <footer className="w-full py-6 bg-[#6c5ce7] text-center text-white text-lg rounded-t-lg md:rounded-lg shadow-inner transition-colors duration-300">
             <p>
                 &copy; Copyright 2024 all rights reserved. Developed and created by{' '}
                 <a

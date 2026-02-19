@@ -9,10 +9,16 @@
 }
 
 body {
-  background: radial-gradient(circle at center, #1e1e2f 0%, #0f0f13 100%);
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8ecf8 50%, #dde3f0 100%);
   min-height: 100vh;
-  color: #ffffff;
+  color: #1e293b;
   font-family: 'Inter', sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background: radial-gradient(circle at center, #1e1e2f 0%, #0f0f13 100%);
+  color: #ffffff;
 }
 
 /* Keyframes for simple rotation */
