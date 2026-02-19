@@ -20,4 +20,5 @@ export default function Microphone({ isListening }) {
             </div>
         </div>
     );
-}
+};
+
