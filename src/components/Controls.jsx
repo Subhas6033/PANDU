@@ -4,7 +4,7 @@ export default function Controls({ onStart, isListening, volume, onStop }) {
             {!isListening ? (
                 <button
                     onClick={onStart}
-                    className="px-8 h-14 w-[400px] bg-[#6c5ce7] hover:bg-[#5a4ad1] text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 active:scale-95 text-lg"
+                    className="px-8 h-14 w-[400px] bg-[#6c5ce7] hover:bg-[#5a4ad1] text-white font-semibold rounded-lg shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 text-lg shadow-purple-200/50 dark:shadow-purple-900/30"
                 >
                     Start Voice Record
                 </button>
@@ -21,7 +21,7 @@ export default function Controls({ onStart, isListening, volume, onStop }) {
             )}
             <a
                 href="#user-guide"
-                className="px-8 py-3 text-center bg-[#6c5ce7] hover:bg-[#5a4ad1] text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 active:scale-95 text-lg no-underline"
+                className="px-8 py-3 text-center bg-[#6c5ce7] hover:bg-[#5a4ad1] text-white font-semibold rounded-lg shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 text-lg no-underline shadow-purple-200/50 dark:shadow-purple-900/30"
             >
                 User-Guide
             </a>

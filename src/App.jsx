@@ -4,6 +4,7 @@ import Microphone from './components/Microphone';
 import Controls from './components/Controls';
 import UserGuide from './components/UserGuide';
 import Footer from './components/Footer';
+import ThemeToggle from './components/ThemeToggle';
 
 function App() {
     const [isListening, setIsListening] = useState(false);
@@ -268,7 +269,10 @@ function App() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen px-4 py-6">
+        <div className="flex flex-col min-h-screen px-4 py-6 transition-colors duration-300">
+            <div className="flex justify-end px-2 mb-2">
+                <ThemeToggle />
+            </div>
             <Header />
             <main className="flex-grow flex flex-col items-center justify-center w-full">
                 <Microphone isListening={isListening} />
