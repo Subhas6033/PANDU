@@ -7,6 +7,10 @@ import Footer from './components/Footer';
 
 function App() {
     const [isListening, setIsListening] = useState(false);
+    const [volume, setVolume] = useState(0);
+    const audioContextRef = useRef(null);
+    const analyserRef = useRef(null);
+    const dataArrayRef = useRef(null);
     const recognitionRef = useRef(null);
 
     // Initialize Speech Recognition
@@ -28,21 +32,85 @@ function App() {
                 const current = event.resultIndex;
                 const transcript = event.results[current][0].transcript.toLowerCase();
                 handleCommand(transcript);
+                stopListening();
             };
         } else {
             console.warn("Speech Recognition API not supported in this browser.");
         }
     }, []);
 
-    const startListening = () => {
+    const startListening = async () => {
+        if (!recognitionRef.current) return;
+
+        try {
+            recognitionRef.current.start();
+            await startVolumeDetection();
+        } catch (error) {
+            console.error("Speech recognition error:", error);
+        }
+    };
+
+    const startVolumeDetection = async () => {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+        const audioContext = new AudioContext();
+        const analyser = audioContext.createAnalyser();
+        const microphone = audioContext.createMediaStreamSource(stream);
+
+        analyser.fftSize = 64;
+
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        microphone.connect(analyser);
+
+        audioContextRef.current = audioContext;
+        analyserRef.current = analyser;
+        dataArrayRef.current = dataArray;
+
+        detectVolume();
+    };
+
+    const detectVolume = () => {
+        if (!analyserRef.current) return;
+
+        analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+
+        let sum = 0;
+        for (let i = 0; i < dataArrayRef.current.length; i++) {
+            sum += dataArrayRef.current[i];
+        }
+
+        const average = sum / dataArrayRef.current.length;
+        setVolume(average);
+
+        requestAnimationFrame(detectVolume);
+    };
+
+    const stopListening = () => {
+        // Stop speech recognition
         if (recognitionRef.current) {
+            recognitionRef.current.onend = null; // prevent double triggers
             try {
-                recognitionRef.current.start();
-            } catch (error) {
-                console.error("Speech recognition error:", error);
-            }
-        } else {
-            alert("Speech Recognition not supported in this browser. Please use Chrome or Edge.");
+                recognitionRef.current.stop();
+            } catch (e) { }
+        }
+
+        // Stop volume detection
+        stopVolumeDetection();
+
+        setIsListening(false);
+    };
+
+    const stopVolumeDetection = () => {
+        audioContextRef.current?.close();
+        audioContextRef.current = null;
+
+        setIsListening(false);
+
+        if (streamRef.current) {
+            streamRef.current.getTracks().forEach(track => track.stop());
+            streamRef.current = null;
         }
     };
 
@@ -204,7 +272,7 @@ function App() {
             <Header />
             <main className="flex-grow flex flex-col items-center justify-center w-full">
                 <Microphone isListening={isListening} />
-                <Controls onStart={startListening} isListening={isListening} />
+                <Controls onStart={startListening} onStop={stopListening} isListening={isListening} volume={volume} />
                 <UserGuide />
             </main>
             <Footer />
