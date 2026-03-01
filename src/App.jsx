@@ -5,6 +5,8 @@ import Controls from './components/Controls';
 import UserGuide from './components/UserGuide';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
+import ToastContainer from './components/ToastContainer';
+import { useToast } from './context/ToastContext';
 
 function App() {
     const [isListening, setIsListening] = useState(false);
@@ -13,6 +15,7 @@ function App() {
     const analyserRef = useRef(null);
     const dataArrayRef = useRef(null);
     const recognitionRef = useRef(null);
+    const toast = useToast();
 
     // Initialize Speech Recognition
     useEffect(() => {
@@ -23,6 +26,7 @@ function App() {
 
             recognitionRef.current.onstart = () => {
                 setIsListening(true);
+                toast.success('Listening... Speak your command!');
             };
 
             recognitionRef.current.onend = () => {
@@ -32,10 +36,17 @@ function App() {
             recognitionRef.current.onresult = (event) => {
                 const current = event.resultIndex;
                 const transcript = event.results[current][0].transcript.toLowerCase();
+                toast.info(`Recognized: "${transcript}"`);
                 handleCommand(transcript);
                 stopListening();
             };
+
+            recognitionRef.current.onerror = (event) => {
+                toast.error(`Speech recognition error: ${event.error}`);
+                stopListening();
+            };
         } else {
+            toast.warning('Speech Recognition is not supported in this browser.');
             console.warn("Speech Recognition API not supported in this browser.");
         }
     }, []);
@@ -47,6 +58,7 @@ function App() {
             recognitionRef.current.start();
             await startVolumeDetection();
         } catch (error) {
+            toast.error('Failed to start voice recognition. Please try again.');
             console.error("Speech recognition error:", error);
         }
     };
@@ -154,10 +166,12 @@ function App() {
         /* Youtube + Music + Video section */
         else if (transcript.includes("open youtube")) {
             panduSpeech("opening youtube !");
+            toast.success('Opening YouTube...');
             window.open("https://www.youtube.com/");
         }
         else if (transcript.includes("play the")) {
             panduSpeech("here's your results!");
+            toast.success('Searching for your request...');
             // Extract song name: remove "play the"
             let query = transcript.replace("play the", "").trim();
             query = query.split(" ").join("+");
@@ -165,6 +179,7 @@ function App() {
         }
         else if (transcript.includes("play the favourite song")) {
             panduSpeech("playing your favourite song!");
+            toast.success('Playing your favourite song!');
             window.open("https://youtu.be/Umqb9KENgmk");
         }
         else if (transcript.includes("play a song") || transcript.includes("play a song for me")) {
@@ -192,25 +207,30 @@ function App() {
             ];
             const randomSong = songs[Math.floor(Math.random() * songs.length)];
             panduSpeech("playing a song for you!");
+            toast.success('Playing a random song for you!');
             window.open(randomSong);
         }
         /* Facebook */
         else if (transcript.includes("open my facebook profile")) {
             panduSpeech("opening your facebook profile sir!");
+            toast.success('Opening your Facebook profile...');
             window.open("https://www.facebook.com/profile.php?id=100049621998517");
         }
         else if (transcript.includes("open facebook")) {
             panduSpeech("openinig facebook !");
+            toast.success('Opening Facebook...');
             window.open("https://www.facebook.com");
         }
         /* Google */
         else if (transcript.includes("open google")) {
             panduSpeech("opening google !");
+            toast.success('Opening Google...');
             window.open("https://www.google.com");
         }
         /* Search anything */
         else if (transcript.includes("search for")) {
             panduSpeech("here's your results!");
+            toast.success('Searching Google for your query...');
             let query = transcript.replace("search for", "").trim();
             query = query.split(" ").join("+");
             window.open(`https://www.google.com/search?q=${query}`);
@@ -218,53 +238,64 @@ function App() {
         /* Instagram */
         else if (transcript.includes("open my instagram profile")) {
             panduSpeech("opening your instagram sir!");
+            toast.success('Opening your Instagram profile...');
             window.open("https://www.instagram.com/goalkeepersubhas/");
         }
         else if (transcript.includes("open instagram")) {
             panduSpeech("opening instagram");
+            toast.success('Opening Instagram...');
             window.open("https://www.instagram.com/");
         }
         /* Github */
         else if (transcript.includes("open my github profile")) {
             panduSpeech("opening your github profile sir!");
+            toast.success('Opening your GitHub profile...');
             window.open("https://github.com/Subhas6033");
         }
         else if (transcript.includes("open github")) {
             panduSpeech("opening github");
+            toast.success('Opening GitHub...');
             window.open("https://github.com/");
         }
         /* Telegram */
         else if (transcript.includes("open telegram")) {
             panduSpeech("opening telegram!");
+            toast.success('Opening Telegram...');
             window.open("https://web.telegram.org/k/")
         }
         /* Whatsapp */
         else if (transcript.includes("open whatsapp")) {
             panduSpeech("opening whatsapp!");
+            toast.success('Opening WhatsApp...');
             window.open("https://web.whatsapp.com/");
         }
         /* Linkedin */
         else if (transcript.includes("open linkdin")) {
             panduSpeech("opening linkdin!");
+            toast.success('Opening LinkedIn...');
             window.open("https://www.linkedin.com");
         }
         /* ChatGPT */
         else if (transcript.includes("open chatgpt")) {
             panduSpeech("opening chatgpt");
+            toast.success('Opening ChatGPT...');
             window.open("https://www.chatgpt.com");
         }
         /* Gmail */
         else if (transcript.includes("open gmail")) {
             panduSpeech("opening gmail");
+            toast.success('Opening Gmail...');
             window.open("https://www.gmail.com");
         }
         /* Twitter */
         else if (transcript.includes("open twitter") || transcript.includes("open x")) {
             panduSpeech("opening x");
+            toast.success('Opening X (Twitter)...');
             window.open("https://www.twitter.com");
         }
         else {
             panduSpeech("I didn't get you! can you tell me again? please.");
+            toast.warning('Command not recognized. Please try again.');
         }
     };
 
@@ -280,6 +311,7 @@ function App() {
                 <UserGuide />
             </main>
             <Footer />
+            <ToastContainer />
         </div>
     )
 }
