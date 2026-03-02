@@ -149,6 +149,7 @@ function App() {
 
             if (aiResponse.reply) {
                 panduSpeech(aiResponse.reply);
+                toast.success(aiResponse.reply);
             }
 
             if (aiResponse.action === "open_url" && aiResponse.url) {
@@ -157,6 +158,7 @@ function App() {
         } catch (error) {
             console.error("Error handling command:", error);
             panduSpeech("Sorry, I encountered an error while processing your request.");
+            toast.error("Error processing request with AI.");
         }
     };
 
