@@ -86,3 +86,19 @@ body {
   z-index: 0;
   filter: drop-shadow(0 0 10px #00d2ff);
 }
+
+/* Toast slide-in animation */
+@keyframes toast-in {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.35s ease-out forwards;
+}

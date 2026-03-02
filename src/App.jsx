@@ -6,6 +6,8 @@ import UserGuide from './components/UserGuide';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
 import { processVoiceCommand } from './services/geminiService'; 
+import ToastContainer from './components/ToastContainer';
+import { useToast } from './context/ToastContext';
 
 function App() {
     const [isListening, setIsListening] = useState(false);
@@ -15,6 +17,7 @@ function App() {
     const dataArrayRef = useRef(null);
     const recognitionRef = useRef(null);
     const streamRef = useRef(null);
+    const toast = useToast();
 
     // Initialize Speech Recognition
     useEffect(() => {
@@ -25,6 +28,7 @@ function App() {
 
             recognitionRef.current.onstart = () => {
                 setIsListening(true);
+                toast.success('Listening... Speak your command!');
             };
 
             recognitionRef.current.onend = () => {
@@ -34,10 +38,17 @@ function App() {
             recognitionRef.current.onresult = (event) => {
                 const current = event.resultIndex;
                 const transcript = event.results[current][0].transcript.toLowerCase();
+                toast.info(`Recognized: "${transcript}"`);
                 handleCommand(transcript);
                 stopListening();
             };
+
+            recognitionRef.current.onerror = (event) => {
+                toast.error(`Speech recognition error: ${event.error}`);
+                stopListening();
+            };
         } else {
+            toast.warning('Speech Recognition is not supported in this browser.');
             console.warn("Speech Recognition API not supported in this browser.");
         }
     }, []);
@@ -49,6 +60,7 @@ function App() {
             recognitionRef.current.start();
             await startVolumeDetection();
         } catch (error) {
+            toast.error('Failed to start voice recognition. Please try again.');
             console.error("Speech recognition error:", error);
         }
     };
@@ -160,6 +172,7 @@ function App() {
                 <UserGuide />
             </main>
             <Footer />
+            <ToastContainer />
         </div>
     )
 }
